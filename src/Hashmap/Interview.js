@@ -9,16 +9,19 @@
 //It sould return undefined
 
 const findRepeatNumber = (arr) => {
-    if (arr.length === 0)
-        return 'undefined'
-    let mapValue = new Map()
+    let mapValue = {}
     for (let i = 0; i < arr.length; i++) {
-        if (!mapValue.get(arr[i])) {
-            mapValue.get(arr[i], 1)
+        if (mapValue[arr[i]] !== undefined) {      //Truy xuất phần tử trong object, và object được xem như là map
+            return arr[i]
+        } else {
+            mapValue[arr[i]] = i;
         }
+        console.log(mapValue)
     }
-    return 1
+    return undefined
 }
+
+
 
 
 let res = findRepeatNumber([2, 5, 1, 2, 3, 5, 1, 2, 4])
