@@ -1,43 +1,35 @@
 // 12-10->5->16
 
-// let myLinkedList = {
-//     head: {
-//         value: 10,
-//         next: {
-//             value: 5,
-//             next: {
-//                 value: 16,
-//                 next: null
-//             }
-//         }            
-//     }
-// }
-class Node {
+class NodeL {
     constructor(value) {
         this.value = value
         this.next = null
+        this.prev = null
     }
 }
 
-class LinkedList {
+class DoublyLinkedList {
     constructor(value) {  //first
         this.head = {
             value: value,
-            next: null
+            next: null,
+            prev: null
         }
         this.tail = this.head
         this.length = 1
     }
 
     append(value) {   //adding to ending
-        const newNode = new Node(value)
+        const newNode = new NodeL(value)
+        newNode.prev = this.tail
         this.tail.next = newNode
         this.tail = newNode
         this.length++
     }
 
     prepend(value) { //adding to beginning
-        const newNode = new Node(value)
+        const newNode = new NodeL(value)
+        this.head.prev = newNode
         newNode.next = this.head
         this.head = newNode
         this.length++
@@ -71,10 +63,12 @@ class LinkedList {
         }
         let preNode = this.traversalToIndex(index - 1)   //leader
         let afterNode = preNode.next  //holding pointer
-        const newNode = new Node(value)
+        const newNode = new NodeL(value)
         //insert
         preNode.next = newNode
+        newNode.prev = preNode
         newNode.next = afterNode
+        afterNode.prev = newNode
         this.length++
     }
 
@@ -84,37 +78,18 @@ class LinkedList {
         } else if (index === 0) {
             return this.head = this.head.next
         }
-        let leader = this.traversalToIndex(index - 1)
+        let preNode = this.traversalToIndex(index - 1)
         let beDeleteNode = leader.next
-        leader.next = beDeleteNode.next
+        preNode.next = beDeleteNode.next
         this.length--
-    }
-
-    reverse() {
-        //check just 1 
-        if (!this.head.next) {
-            return this.head
-        }
-        let first = this.head
-        let second = first.next 
-        this.tail = this.head
-        while(second){
-            let temp = second.next
-            second.next = first
-            first = second
-            second = temp
-        }
-        this.head.next = null
-        this.head = first
     }
 }
 
-const myLinkedList = new LinkedList(10)
+const myLinkedList = new DoublyLinkedList(10)
 myLinkedList.append(5)
 myLinkedList.append(16)
 myLinkedList.prepend(12)
 myLinkedList.insert(1, 1)
-myLinkedList.reverse()
 
 console.log(myLinkedList.printList())
 console.log(myLinkedList)
