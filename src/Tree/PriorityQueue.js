@@ -23,9 +23,9 @@ class PriorityQueue {
             
         //
     }
-    dequeue()
-    front()
-    isEmpty()
-    printPQueue()
+    // dequeue()
+    // front()
+    // isEmpty()
+    // printPQueue()
 
 }
