@@ -39,7 +39,7 @@ class Trie{
             if(!node.children[char]){
                 node.children[char] = new TrieNode()
             }
-            node = node.children[char]
+            node = node.children[char] //mỗi char là key của node, ex: 'a': {children, isEnd}
         }
         node.isEnd = true  //Đánh dấu kết thúc từ
     }
